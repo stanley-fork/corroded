@@ -44,3 +44,7 @@ name = "all_together"
 path = "examples/all_together.rs"
 
 [dependencies]
+
+[target.'cfg(all(target_os = "linux", target_arch = "x86_64"))'.dependencies]
+lde = "0.3"
+libc = "0.2.178"

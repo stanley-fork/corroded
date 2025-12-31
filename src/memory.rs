@@ -90,3 +90,55 @@ impl ArbitraryAccess {
         }
     }
 }
+
+#[cfg(all(target_os = "linux", target_arch = "x86_64"))]
+pub fn remove_segfaults() {
+    unsafe {
+        libc::sigaction(
+            libc::SIGSEGV,
+            &libc::sigaction {
+                sa_sigaction: handler as *const () as usize,
+                sa_mask: std::mem::zeroed::<libc::sigset_t>(),
+                sa_flags: libc::SA_ONSTACK | libc::SA_SIGINFO,
+                sa_restorer: None,
+            },
+            std::ptr::null_mut(),
+        );
+    }
+
+    extern "C" fn handler(
+        _signo: libc::c_int,
+        info: *mut libc::siginfo_t,
+        context: *mut libc::ucontext_t,
+    ) {
+        unsafe {
+            let ctx = &mut *context;
+            let info = &mut *info;
+            let fault_addr = info.si_addr() as usize;
+
+            let masked_off = fault_addr & (!0xFFF);
+            let ret = libc::mmap(
+                masked_off as *mut libc::c_void,
+                4096,
+                libc::PROT_WRITE | libc::PROT_READ,
+                libc::MAP_ANONYMOUS | libc::MAP_FIXED,
+                0,
+                0,
+            );
+
+            if ret as isize != -1 {
+                return;
+            }
+
+            let old_rip = ctx.uc_mcontext.gregs[libc::REG_RIP as usize] as usize;
+            let array = std::slice::from_raw_parts(old_rip as *mut u8, 15);
+            let mut out = lde::X64.iter(array, old_rip as u64);
+
+            let Some((opcode, _)) = out.next() else {
+                libc::abort();
+            };
+
+            ctx.uc_mcontext.gregs[libc::REG_RIP as usize] += opcode.len() as i64;
+        }
+    }
+}
