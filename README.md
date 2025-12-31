@@ -1,5 +1,7 @@
 # corroded
 
+[![Crates.io](https://img.shields.io/crates/v/corroded-rs.svg)](https://crates.io/crates/corroded-rs)
+
 "We used to tell compilers what to do. Now they lecture us about 'lifetimes' and 'ownership.' Time to write code the way God intended." — Terry Davis, probably
 
 ## What Is This
