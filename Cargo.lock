@@ -3,12 +3,12 @@
 version = 4
 
 [[package]]
-name = "corroded"
+name = "corroded-rs"
 version = "0.1.0"
 
 [[package]]
 name = "corroded-testimonials"
 version = "0.1.0"
 dependencies = [
- "corroded",
+ "corroded-rs",
 ]
