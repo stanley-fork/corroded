@@ -1,5 +1,6 @@
-use std::ops::{Index, IndexMut};
-use std::ptr;
+use core::ops::{Index, IndexMut};
+use core::ptr;
+use alloc::vec::Vec;
 
 pub struct CursedVec<T> {
     inner: Vec<T>,
