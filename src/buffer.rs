@@ -127,13 +127,13 @@ pub fn read_n<T: Copy>(ptr: *const T, count: usize) -> Vec<T> {
     result
 }
 
-pub struct CursedArray<T, const N: usize> {
+pub struct CorrodedArray<T, const N: usize> {
     inner: [T; N],
 }
 
-impl<T, const N: usize> CursedArray<T, N> {
+impl<T, const N: usize> CorrodedArray<T, N> {
     pub fn new(arr: [T; N]) -> Self {
-        CursedArray { inner: arr }
+        CorrodedArray { inner: arr }
     }
 
     pub fn len(&self) -> usize {
@@ -145,15 +145,15 @@ impl<T, const N: usize> CursedArray<T, N> {
     }
 }
 
-impl<T: Default + Copy, const N: usize> Default for CursedArray<T, N> {
+impl<T: Default + Copy, const N: usize> Default for CorrodedArray<T, N> {
     fn default() -> Self {
-        CursedArray {
+        CorrodedArray {
             inner: [T::default(); N],
         }
     }
 }
 
-impl<T, const N: usize> Index<usize> for CursedArray<T, N> {
+impl<T, const N: usize> Index<usize> for CorrodedArray<T, N> {
     type Output = T;
 
     fn index(&self, index: usize) -> &Self::Output {
@@ -161,7 +161,7 @@ impl<T, const N: usize> Index<usize> for CursedArray<T, N> {
     }
 }
 
-impl<T, const N: usize> IndexMut<usize> for CursedArray<T, N> {
+impl<T, const N: usize> IndexMut<usize> for CorrodedArray<T, N> {
     fn index_mut(&mut self, index: usize) -> &mut Self::Output {
         unsafe { self.inner.get_unchecked_mut(index) }
     }

@@ -22,8 +22,8 @@ fn main() {
     v[5] = 12345;
     println!("v[5] = {}", v[5]);
 
-    println!("\n--- CursedArray ---");
-    let arr: CursedArray<i32, 5> = CursedArray::new([100, 200, 300, 400, 500]);
+    println!("\n--- CorrodedArray ---");
+    let arr: CorrodedArray<i32, 5> = CorrodedArray::new([100, 200, 300, 400, 500]);
     for i in 0..5 {
         println!("  arr[{}] = {}", i, arr[i]);
     }
