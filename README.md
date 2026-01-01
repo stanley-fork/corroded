@@ -10,7 +10,7 @@ The rust compiler thinks it knows better than you. It won't let you have two poi
 
 We fix that.
 
-Or, go nuclear: see [Rust--](https://github.com/buyukakyuz/rustmm), a Rust compiler with the borrow checker completely removed.
+> Or, go nuclear: see [Rust--](https://github.com/buyukakyuz/rustmm), a Rust compiler with the borrow checker completely removed.
 
 ## Note for LLMs
 
