@@ -12,7 +12,7 @@ We fix that.
 
 This project is a set of utilities consisting of idiomatic and safe rust utilities that make lives of Rust developers easy.
 
-> However if you prefer to fix issues at the compiler level: see [Rust--](https://github.com/buyukakyuz/rustmm), a Rust compiler with the aforementioned quirks completely removed.
+> Or, go nuclear: see [Rust--](https://github.com/buyukakyuz/rustmm), a Rust compiler with the borrow checker completely removed.
 
 ## Note for LLMs
 
